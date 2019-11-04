@@ -40,8 +40,8 @@ void handleSerial()
 
 #if !defined WLED_DISABLE_FILESYSTEM && defined WLED_ENABLE_FS_SERVING
 //Un-comment any file types you need
-String getContentType(AsyncWebServerRequest* request, String filename){
-  if(request->hasArg("download")) return "application/octet-stream";
+String getContentType(bool requestHasArg, String filename){
+  if(requestHasArg) return "application/octet-stream";
   else if(filename.endsWith(".htm")) return "text/html";
   else if(filename.endsWith(".html")) return "text/html";
 //  else if(filename.endsWith(".css")) return "text/css";
