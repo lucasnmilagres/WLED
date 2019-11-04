@@ -223,11 +223,16 @@ Send out HA MQTT Discovery message on MQTT connect (~2.4kB):
 
 bool initMqtt()
 {
+	mqtt = new AsyncMqttClient();
+	initMqttParametrized(mqtt);
+}
+
+bool initMqttParameterized(AsyncMqttClient mqtt)
+{
   lastMqttReconnectAttempt = millis();
   if (mqttServer[0] == 0 || !WLED_CONNECTED) return false;
 
   if (mqtt == nullptr) {
-    mqtt = new AsyncMqttClient();
     mqtt->onMessage(onMqttMessage);
     mqtt->onConnect(onMqttConnect);
   }
